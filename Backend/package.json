@@ -5,6 +5,7 @@
   "main": "sever.js",
   "dependencies": {
     "@netlify/functions": "^2.0.2",
+    "axios": "^1.5.0",
     "mysql": "^2.18.1",
     "netlify-cli": "^16.1.0",
     "netlify-lambda": "^2.0.16",
