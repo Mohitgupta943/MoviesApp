@@ -1,6 +1,4 @@
-
 import Server from '../sever.js'; 
-
 
 class Auth {
 
@@ -17,18 +15,26 @@ class Auth {
 
     loginUser(req,res){
 
-        console.log("login "  + " " + req.username + " " + req.password)
+        console.log("login "  + " " + req.username + " " + req.password+" "+ req.email)
         let pass = req.password
         let email = req.email
         let query=`select * from users where email="${email}" and pass="${pass}"`
         this.dbserver.con.query(query, function (err, result) {
             if (err) {
-              console.log(err.toString());
+              console.log("error while login "+err.toString());
               res.status(500).send(err.toString());
             } else {
-              console.log(result)
-              console.log("user created "+ result.insertId) 
-              res.send("success")
+               result=JSON.parse(JSON.stringify(result))
+            //   console.log(result+" "+result.body)
+            //   
+              if(result !=null && result.length==1){
+                console.log("result "+result.length+" "+result[0].email+" "+result[0].id)
+                res.send({"response" : "success"})
+                
+              }else{
+                res.send({"response" : "fail"})
+              }
+              
             }
           })    
 
