@@ -14,74 +14,53 @@ class GetList {
     this.SEARCH_URL_TV = this.BASE_URL + '/search/tv?' + this.API_KEY;
   }
 
-  getMovies(req, res) {
-    let key = req.searchterm;
-    let url = this.SEARCH_URL_MOVIE + '&query=' + key;
-    console.log(url);
+  fetchAndResponse(url, res) {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         console.log("Successful");
         res.send(data);
       });
+  }
+
+  getMovies(req, res) {
+    let key = req.searchterm;
+    let url = this.SEARCH_URL_MOVIE + '&query=' + key;
+    console.log(url);
+    this.fetchAndResponse(url, res);
   };
 
   getSeries(req, res) {
     let key = req.searchterm;
     let url = this.SEARCH_URL_TV + '&query=' + key;
     console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
+    this.fetchAndResponse(url, res);
   };
 
   getPopularMovies(req, res) {
     let url = this.POPULAR_MOVIES_URL;
     console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
+    this.fetchAndResponse(url, res);
   };
 
   getPopularSeries(res) {
     let url = this.POPULAR_SERIES_URL;
     console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
+    this.fetchAndResponse(url, res);
   };
 
   getMovieTrailers(req, res) {
     let key = req.searchterm;
     let url = this.BASE_URL + '/movie/' + key + '/videos?' + this.API_KEY;;
     console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
+    this.fetchAndResponse(url, res);
   };
 
   getTVTrailers(req, res) {
     let key = req.searchterm;
     let url = this.BASE_URL + '/tv/' + key + '/videos?' + this.API_KEY;;
     console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
+    this.fetchAndResponse(url, res);
   };
 
 }

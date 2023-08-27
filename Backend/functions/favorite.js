@@ -11,31 +11,18 @@ api.use((req, res, next) => {
     next();
 });
 const router = express.Router();
+let favorite = new Favorite();
 
-// Search Movies
-// Recieves {"searchterm":"String"}
-router.post('/movies', (req, res) => {
-    let favorite = new Favorite();
-    favorite.postMovieFavorite(req.body, res);
+// Posts Favorites for a user id
+// Recieves {"user_id":"Int","media":"JSON"}
+router.post('/postfavorites', (req, res) => {
+    favorite.postFavorite(req.body, res);
 });
 
-// Search Series
-// Recieves {"searchterm":"String"}
-router.post('/series', (req, res) => {
-    let favorite = new Favorite();
-    favorite.postSeriesFavorite(req.body, res);
-});
-
-// Get Popular Movies
-router.get('/movies', (req, res) => {
-    let favorite = new Favorite();
-    favorite.getMovieFavorite(req, res);
-});
-
-// Get Popular Series
-router.get('/series', (req, res) => {
-    let favorite = new Favorite();
-    favorite.getSeriesFavorite(res);
+// Get Favorites for a user id
+// Receives {"user_id":"Int"}
+router.post('/getfavorites', (req, res) => {
+    favorite.getFavorite(req.body, res);
 });
 
 

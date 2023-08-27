@@ -1,63 +1,36 @@
-import { dbConnection, executeQuery } from '../connections.js'
-import Constants from '../constants.js'
-const { API_KEY } = process.env;
+import Server from '../sever.js';
 
 class Comment {
 
   constructor() {
-    this.API_KEY = API_KEY;
-    this.BASE_URL = 'https://api.themoviedb.org/3';
-    this.POPULAR_MOVIES_URL = this.BASE_URL + '/movie/popular?language=en-US&page=1&' + this.API_KEY;
-    this.POPULAR_SERIES_URL = this.BASE_URL + '/tv/popular?language=en-US&page=1&' + this.API_KEY;
-    this.IMG_URL = 'https://image.tmdb.org/t/p/w500';
-    this.SEARCH_URL_MOVIE = this.BASE_URL + '/search/movie?' + this.API_KEY;
-    this.SEARCH_URL_TV = this.BASE_URL + '/search/tv?' + this.API_KEY;
+    this.dbserver = new Server();
+    this.dbserver.connectDB();
   }
 
-  postMovieComment(req, res) {
-    let key = req.searchterm;
-    let url = this.SEARCH_URL_MOVIE + '&query=' + key;
-    console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
+  executeQuery(query, res) {
+    this.dbserver.con.query(query, function (err, result) {
+      if (err) {
+        console.log(err.toString());
+        res.status(500).send(err.toString());
+      } else {
+        console.log(result);
+        console.log("Query Executed Successfully");
+        res.send(result);
+      }
+    })
+  }
+
+  postComment(req, res) {
+    let comment = req.comment;
+    let media_id = req.media_id;
+    let query = `INSERT INTO comments (media_id, comment) values ("${media_id}", "${comment}");`
+    this.executeQuery(query, res);
   };
 
-  postSeriesComment(req, res) {
-    let key = req.searchterm;
-    let url = this.SEARCH_URL_TV + '&query=' + key;
-    console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
-  };
-
-  getMovieComment(req, res) {
-    let url = this.POPULAR_MOVIES_URL;
-    console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
-  };
-
-  getSeriesComment(res) {
-    let url = this.POPULAR_SERIES_URL;
-    console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Successful");
-        res.send(data);
-      });
+  getComment(req, res) {
+    let media_id = req.media_id;
+    let query = `SELECT comment FROM comments WHERE media_id="${media_id}";`
+    this.executeQuery(query, res);
   };
 
 }

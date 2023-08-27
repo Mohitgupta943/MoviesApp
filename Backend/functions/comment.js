@@ -11,32 +11,20 @@ api.use((req, res, next) => {
     next();
 });
 const router = express.Router();
+let comment = new Comment();
 
-// Search Movies
-// Recieves {"searchterm":"String"}
-router.post('/movies', (req, res) => {
-    let comment = new Comment();
-    comment.postMovieComment(req.body, res);
+// Posts Comments for a media id
+// Recieves {"comment":"String","media_id":"Int"}
+router.post('/postcomment', (req, res) => {
+    comment.postComment(req.body, res);
 });
 
-// Search Series
-// Recieves {"searchterm":"String"}
-router.post('/series', (req, res) => {
-    let comment = new Comment();
-    comment.postSeriesComment(req.body, res);
+// Get Comment for a media id
+// Receives {"media_id":"Int"}
+router.post('/getcomment', (req, res) => {
+    comment.getComment(req.body, res);
 });
 
-// Get Popular Movies
-router.get('/movies', (req, res) => {
-    let comment = new Comment();
-    comment.getMovieComment(req, res);
-});
-
-// Get Popular Series
-router.get('/series', (req, res) => {
-    let comment = new Comment();
-    comment.getSeriesComment(res);
-});
 
 
 api.use('/.netlify/functions/comment', router);
