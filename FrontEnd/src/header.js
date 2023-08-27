@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import "./styles/Auth.css"
 
-// Header component receives props: searchTerm, onSearchChange, and onSearchSubmit
-function Header({ searchTerm, onSearchChange, onSearchSubmit }) {
+function Header({ searchTerm, onSearchChange, onSearchSubmit, isLoggedIn, onLogout }) {
   return (
     <header>
-      {/* Search form with input */}
       <form id="form" onSubmit={onSearchSubmit}>
         <input
           type="text"
@@ -15,6 +15,16 @@ function Header({ searchTerm, onSearchChange, onSearchSubmit }) {
           onChange={onSearchChange}
         />
       </form>
+      {/* Use the Link component to navigate to the login page */}
+      <Link to="/login" className="login-button">
+        {isLoggedIn ? 'Logout' : 'Login'}
+      </Link>
+      {/* Conditionally render the logout button */}
+      {isLoggedIn && (
+        <button className="logout-button" onClick={onLogout}>
+          Logout
+        </button>
+      )}
     </header>
   );
 }

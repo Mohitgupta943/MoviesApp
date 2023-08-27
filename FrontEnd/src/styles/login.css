@@ -1,0 +1,90 @@
+/* Login.css */
+
+.login-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--secondary-color);
+  }
+  
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fffefe;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #fffefe;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .button-group {
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    font-weight: bolder;
+    font-size: 18px;
+  }
+  
+  .button-group:hover{
+    background-color: #057a03;
+  }
+  
+  .button-group1 {
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    font-weight: bold;
+    text-decoration: none; /* Remove underline */
+    display: block; /* Center the button */
+    margin: 0 auto; /* Center the button */
+  }
+  
+  .button-group1:hover{
+    background-color: #f5cc00;
+  }
+/* Success Alert Styles */
+.login-success {
+    background-color: #4caf50; /* Green background color */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed; /* Position the alert fixed to the bottom */
+    left: 0; /* Place it at the left edge */
+    bottom: 0; /* Place it at the bottom */
+    width: 100%; /* Full width */
+    z-index: 999; /* Set a high z-index to ensure it's above other elements */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    font-weight: bold;
+  }
